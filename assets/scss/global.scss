@@ -1,0 +1,28 @@
+:root {
+  // background color
+  --bg-primary: rgb(248, 247, 250);
+  --bg-white: #fff;
+  --bg-sign-in: rgb(248, 249, 253);
+  // text color
+  --color-primary-sign-in: #989da9;
+  // color
+  --color-primary: rgb(115, 0, 240);
+  --color-primary-hover: rgb(115, 70, 240);
+  --color-white: #fff;
+  // border color
+  --border-color-secondary: rgb(241,239,242);
+}
+
+.background-primary {
+  background: var(--bg-primary);
+}
+.color-primary{
+  color: var(--color-primary);
+}
+.color-secondary-sign-in {
+  color: var(--color-primary-sign-in);
+}
+
+.mt-12px {
+  margin-top: 12px !important;
+}
