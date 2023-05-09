@@ -12,7 +12,9 @@ export default {
   css: ['~/assets/scss/global.scss', '~/assets/scss/form--custom-v1.scss', '~/assets/scss/font-config.scss', 'bootstrap/dist/css/bootstrap.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [ {
+  plugins: [{
+    src: '~/plugins/aos.client.js', ssr: true
+  }, {
     src: "~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", mode: "client"
   }
 

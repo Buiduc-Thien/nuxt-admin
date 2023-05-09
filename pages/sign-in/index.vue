@@ -1,6 +1,6 @@
 <template>
   <div class="wrap-sign-in d-flex align-items-center justify-content-center">
-    <div class="popup-sign-in p-5 d-flex flex-column justify-content-center align-items-center">
+    <div class="popup-sign-in p-5 d-flex flex-column justify-content-center align-items-center" data-aos="zoom-in">
       <div class="popup-sign-in__title d-flex flex-column justify-content-center align-items-center">
         <h5 class="fw-semibold mb-2 text-black">You must Sign In to Join</h5>
         <p class="color-secondary-sign-in mb-0 fs-7">

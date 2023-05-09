@@ -1,6 +1,6 @@
 <template>
   <div class="wrap-sign-up d-flex align-items-center justify-content-center">
-    <div class="popup-sign-up p-5 d-flex flex-column justify-content-center align-items-center">
+    <div class="popup-sign-up p-5 d-flex flex-column justify-content-center align-items-center" data-aos="zoom-in">
       <div class="popup-sign-up__title d-flex flex-column justify-content-center align-items-center">
         <h5 class="fw-semibold mb-0 text-black">Create an Account</h5>
       </div>
@@ -99,21 +99,22 @@
         </form>
       </div>
       <div class="popup-sign-up__back w-100 mt-12px">
-        <button class="btn-primary--outline back-to-sign-in d-flex align-items-center justify-content-center">
-          <svg
-            class=""
-            height="18"
-            style="enable-background: new 0 0 512 512"
-            version="1.1"
-            viewBox="0 0 24 24"
-            width="18"
-            x="0"
-            xml:space="preserve"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:svgjs="http://svgjs.com/svgjs"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            y="0"
-          >
+        <nuxt-link class="text-decoration-none" to="/sign-in">
+          <button class="btn-primary--outline back-to-sign-in d-flex align-items-center justify-content-center">
+            <svg
+              class=""
+              height="18"
+              style="enable-background: new 0 0 512 512"
+              version="1.1"
+              viewBox="0 0 24 24"
+              width="18"
+              x="0"
+              xml:space="preserve"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:svgjs="http://svgjs.com/svgjs"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              y="0"
+            >
               <g>
                 <path
                   class=""
@@ -123,8 +124,9 @@
                 ></path>
               </g>
             </svg>
-          <span>Back to Sign In</span>
-        </button>
+            <span>Back to Sign In</span>
+          </button>
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -164,11 +166,12 @@
     }
 
     .back-to-sign-in {
-      svg{
+      svg {
         margin-right: 16px;
         transition: .4s;
 
       }
+
       &:hover {
         svg {
           margin-right: 24px;
