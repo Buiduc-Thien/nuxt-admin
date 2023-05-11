@@ -1,6 +1,6 @@
 <template>
   <div class="wrap-sign-in d-flex align-items-center justify-content-center">
-    <div class="popup-sign-in p-5 d-flex flex-column justify-content-center align-items-center" data-aos="zoom-in">
+    <div class="popup-sign-in p-5 d-flex flex-column justify-content-center align-items-center">
       <div class="popup-sign-in__title d-flex flex-column justify-content-center align-items-center">
         <h5 class="fw-semibold mb-2 text-black">You must Sign In to Join</h5>
         <p class="color-secondary-sign-in mb-0 fs-7">
@@ -25,8 +25,10 @@
       </div>
       <div class="popup-sign-in__form w-100">
         <form action="">
-          <div class="form__input input-admin--custom input__username">
-            <input name="userName" placeholder="Uname@gmail.com" type="text">
+          <div class="form__input input-admin--custom input__username"
+               v-bind:class="{'has-value' : formAction.email !== ''}">
+            <input v-model="formAction.email" class="fw-semibold" name="userName" placeholder="Uname@gmail.com" required
+                   type="text">
             <svg
               class=""
               height="18"
@@ -49,8 +51,12 @@
             </g>
           </svg>
           </div>
-          <div class="form__input input-admin--custom input__password">
-            <input name="password" placeholder="Password" type="password">
+          <div class="form__input input-admin--custom input__password"
+               v-bind:class="{'has-value' : formAction.password !== ''}">
+            <input v-model="formAction.password" name="password" placeholder="Password" required
+                   v-bind:type="formAction.showPassword ? 'text' : 'password'">
+            <span :class="formAction.showPassword ? 'show' : ''" class="show-password-icon" @click="showPassword()">
+            </span>
             <svg
               height="18"
               style="enable-background: new 0 0 512 512"
@@ -84,9 +90,9 @@
             </nuxt-link>
           </div>
           <div class="form__action mt-3">
-            <button class="btn-primary d-flex align-items-center justify-content-center" disabled>
+            <button class="btn-primary d-flex align-items-center justify-content-center">
               <span>Sign in with Your Account</span>
-              <v-progress-circular indeterminate :size="20" :width="3"></v-progress-circular>
+              <v-progress-circular :size="20" :width="3" indeterminate></v-progress-circular>
             </button>
           </div>
         </form>
@@ -98,7 +104,24 @@
     </div>
   </div>
 </template>
-<script setup>
+<script>
+export default {
+  data() {
+    return {
+      formAction: {
+        email: "",
+        password: "",
+        showPassword: false,
+      }
+    }
+  },
+  methods: {
+    showPassword() {
+      this.formAction.showPassword = !this.formAction.showPassword;
+    },
+  }
+}
+
 </script>
 <style lang="scss" scoped>
 .wrap-sign-in {
@@ -112,33 +135,6 @@
 
     &__method {
       margin: 20px 0;
-    }
-
-    &__line {
-
-      &__element {
-        position: relative;
-
-        &::before {
-          background: var(--border-color-secondary);
-          bottom: 45%;
-          content: "";
-          left: 24px;
-          height: 1px;
-          position: absolute;
-          width: 118px;
-        }
-
-        &::after {
-          background: var(--border-color-secondary);
-          bottom: 45%;
-          right: 24px;
-          content: "";
-          height: 1px;
-          position: absolute;
-          width: 118px;
-        }
-      }
     }
 
     &__form {
@@ -175,7 +171,6 @@
         }
       }
     }
-
   }
 }
 </style>

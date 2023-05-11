@@ -16,7 +16,9 @@ export default {
     src: '~/plugins/aos.client.js', ssr: true
   }, {
     src: "~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", mode: "client"
-  }
+  },
+    {src: '~/plugins/firebase.js', mode: 'client'},
+
 
   ],
 
@@ -31,9 +33,10 @@ export default {
     '@nuxtjs/axios', // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/vuetify',
-
   ],
-
+  firebase: {
+    // options
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308

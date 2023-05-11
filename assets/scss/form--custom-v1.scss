@@ -35,7 +35,6 @@
     outline: none;
     font-weight: 500;
     transition: .4s;
-
     span {
       display: block;
     }
@@ -60,6 +59,9 @@
       background-color: var(--color-primary-hover);
       border-color: var(--color-primary-hover);
       transition: .4s;
+      outline-offset: -10000px;
+      outline: solid var(--color-white);
+
     }
   }
 
@@ -131,7 +133,7 @@
     }
   }
 
-  &:hover {
+  &:hover, &.has-value {
     input {
       caret-color: var(--color-primary);
       border-color: var(--color-primary);
@@ -185,15 +187,26 @@
 }
 
 .input__password {
-  &:after {
-    content: "";
-    height: 14px;
-    width: 14px;
-    position: absolute;
-    right: 16px;
-    background: url('/assets/images/svg-i/eye.svg');
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
+  .show-password-icon {
+    &::after {
+      content: "";
+      height: 14px;
+      width: 14px;
+      position: absolute;
+      right: 16px;
+      background: url('~assets/images/svg-i/eye.svg');
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      transition: .4s;
+
+    }
+
+    &.show {
+      &:after {
+        background: url('~assets/images/svg-i/eye-close.svg');
+        transition: .4s;
+      }
+    }
   }
 }
