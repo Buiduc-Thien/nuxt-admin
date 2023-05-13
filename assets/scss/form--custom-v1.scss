@@ -54,7 +54,6 @@
         display: none;
       }
     }
-
     &:hover {
       background-color: var(--color-primary-hover);
       border-color: var(--color-primary-hover);
@@ -105,6 +104,8 @@
 .input-admin--custom {
   width: 100%;
   position: relative;
+  font-size: 14px;
+  transition: .4s;
 
   svg {
     position: absolute;

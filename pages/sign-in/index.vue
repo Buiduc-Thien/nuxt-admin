@@ -1,6 +1,6 @@
 <template>
   <div class="wrap-sign-in d-flex align-items-center justify-content-center">
-    <div class="popup-sign-in p-5 d-flex flex-column justify-content-center align-items-center">
+    <div class="popup-sign-in p-5 d-flex flex-column justify-content-center align-items-center" data-aos="zoom-in">
       <div class="popup-sign-in__title d-flex flex-column justify-content-center align-items-center">
         <h5 class="fw-semibold mb-2 text-black">You must Sign In to Join</h5>
         <p class="color-secondary-sign-in mb-0 fs-7">
@@ -8,11 +8,11 @@
         </p>
       </div>
       <div class="popup-sign-in__method d-flex flex-column justify-content-center align-items-center w-100">
-        <button class="btn-login-with-social">
+        <button class="btn-login-with-social" @click="registerWithGoogleFirebase()">
           <img alt="Google Icon" class="me-3" src="@/assets/images/svg-i/google.svg">
           Sign in with Google
         </button>
-        <button class="btn-login-with-social mt-12px">
+        <button class="btn-login-with-social mt-12px" @click="registerWithFacebookFirebase()">
           <img alt="Facebook Icon" class="me-3" src="@/assets/images/svg-i/facebook.svg">
           Sign in with Facebook
         </button>
@@ -105,6 +105,8 @@
   </div>
 </template>
 <script>
+import sendDataToServer from "~/helpers/authentication";
+
 export default {
   data() {
     return {
@@ -119,6 +121,15 @@ export default {
     showPassword() {
       this.formAction.showPassword = !this.formAction.showPassword;
     },
+    registerWithGoogleFirebase() {
+      this.$store.dispatch('auth/registerWithGoogleFirebase');
+    },
+    registerWithFacebookFirebase() {
+      this.$store.dispatch('auth/registerWithFacebookFirebase');
+    },
+  },
+  created() {
+    this.$store.dispatch('auth/handleRedirectResultFireBase');
   }
 }
 
@@ -135,6 +146,32 @@ export default {
 
     &__method {
       margin: 20px 0;
+    }
+
+    &__line {
+      &__element {
+        position: relative;
+
+        &::before {
+          background: var(--border-color-secondary);
+          bottom: 45%;
+          content: "";
+          left: 24px;
+          height: 1px;
+          position: absolute;
+          width: 118px;
+        }
+
+        &::after {
+          background: var(--border-color-secondary);
+          bottom: 45%;
+          right: 24px;
+          content: "";
+          height: 1px;
+          position: absolute;
+          width: 118px;
+        }
+      }
     }
 
     &__form {

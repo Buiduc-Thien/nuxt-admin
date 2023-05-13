@@ -6,8 +6,10 @@
       </div>
       <div class="popup-sign-up__form w-100">
         <form action="">
-          <div class="form__input input-admin--custom input__username">
-            <input name="userName" placeholder="Uname@gmail.com" type="text">
+          <div class="form__input input-admin--custom input__username"
+               v-bind:class="{'has-value' : formAction.email !== ''}">
+            <input v-model="formAction.email" class="fw-semibold" name="userName" placeholder="Uname@gmail.com" required
+                   type="text">
             <svg
               class=""
               height="18"
@@ -30,8 +32,13 @@
             </g>
           </svg>
           </div>
-          <div class="form__input input-admin--custom input__password">
-            <input name="password" placeholder="Password" type="password">
+          <div class="form__input input-admin--custom input__password password-confirmation"
+               v-bind:class="{'has-value' : formAction.password !== ''}">
+            <input v-model="formAction.password" name="password"
+                   placeholder="Password confirmation" required
+                   v-bind:type="formAction.password ? 'text' : 'password'">
+            <span :class="formAction.password ? 'show' : ''" class="show-password-icon" @click="showPassword()">
+            </span>
             <svg
               height="18"
               style="enable-background: new 0 0 512 512"
@@ -60,8 +67,13 @@
             </g>
           </svg>
           </div>
-          <div class="form__input input-admin--custom input__password">
-            <input name="password" placeholder="Password confirmation" type="password">
+          <div class="form__input input-admin--custom input__password"
+               v-bind:class="{'has-value' : formAction.passwordConfirmation !== ''}">
+            <input v-model="formAction.passwordConfirmation" name="password"
+                   placeholder="Password confirmation" required
+                   v-bind:type="formAction.showPasswordConfirmation ? 'text' : 'password'">
+            <span :class="formAction.showPasswordConfirmation ? 'show' : ''" class="show-password-icon" @click="showPasswordConfirmation()">
+            </span>
             <svg
               height="18"
               style="enable-background: new 0 0 512 512"
@@ -131,7 +143,28 @@
     </div>
   </div>
 </template>
-<script setup>
+<script>
+export default {
+  data() {
+    return {
+      formAction: {
+        email: "",
+        password: "",
+        passwordConfirmation: "",
+        showPassword: false,
+        showPasswordConfirmation: false,
+      }
+    }
+  },
+  methods: {
+    showPassword() {
+      this.formAction.showPassword = !this.formAction.showPassword;
+    },
+    showPasswordConfirmation() {
+      this.formAction.showPasswordConfirmation = !this.formAction.showPasswordConfirmation;
+    },
+  }
+}
 </script>
 <style lang="scss" scoped>
 .wrap-sign-up {
@@ -174,7 +207,7 @@
 
       &:hover {
         svg {
-          margin-right: 24px;
+          transform: translateX(-4px);
           transition: .4s;
         }
       }
