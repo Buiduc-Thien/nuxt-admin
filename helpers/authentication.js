@@ -1,6 +1,6 @@
 
 export default function sendDataToServer($axios, userProfile) {
-  return $axios.$post('/login/google', userProfile)
+  return $axios.$post('/login/firebase', userProfile)
     .then((response) => {
       return response.data;
     })

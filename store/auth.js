@@ -1,7 +1,10 @@
 import sendDataToServer from "~/helpers/authentication";
 
+
 export default {
   state: () => ({
+    redirectPath: '/',
+    accessToken: null,
     user: {}
   }),
 
@@ -12,16 +15,28 @@ export default {
   mutations: {
     setUser(state, user) {
       state.user = user
-      console.log(state.user)
+    },
+    setAccessToken(state, accessToken) {
+      state.accessToken = accessToken
+    },
+    setRedirectPath(state, redirectPath){
+      state.redirectPath = redirectPath
+    },
+    clearAccessToken(state) {
+      localStorage.removeItem('accessToken')
+      state.accessToken = null
+      state.user = {}
     }
   },
 
   actions: {
     registerWithGoogleFirebase({commit}) {
+      commit('clearAccessToken')
       const googleAuthProvider = new this.$fireModule.auth.GoogleAuthProvider()
       this.$fire.auth.signInWithRedirect(googleAuthProvider)
     },
     registerWithFacebookFirebase({commit}) {
+      commit('clearAccessToken')
       const facebookAuthProvider = new this.$fireModule.auth.FacebookAuthProvider()
       this.$fire.auth.signInWithRedirect(facebookAuthProvider)
     },
@@ -47,6 +62,10 @@ export default {
                   emailVerified: response.user.avatar,
                   roleId: response.user.role_id,
                 })
+                localStorage.setItem('accessToken', response.access_token)
+                commit('setAccessToken', {
+                  accessToken: response.access_token
+                })
               })
               .catch((error) => {
                 console.log(error)
@@ -56,6 +75,11 @@ export default {
         .catch((error) => {
           console.log(error)
         })
+    },
+    getAccessTokenLocalStorage({commit}, accessToken){
+      commit('setAccessToken', {
+        accessToken: accessToken
+      })
     }
   }
 }

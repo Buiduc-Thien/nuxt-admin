@@ -130,6 +130,24 @@ export default {
   },
   created() {
     this.$store.dispatch('auth/handleRedirectResultFireBase');
+    if (process.client) {
+      const accessToken = localStorage.getItem('accessToken')
+      const role = this.$store.state.auth.user.roleId
+      const setRedirectPath = this.$store.state.auth.redirectPath
+      if (accessToken) {
+        this.$store.dispatch('auth/getAccessTokenLocalStorage', accessToken);
+        this.$router.push(setRedirectPath)
+      }
+    }
+  },
+  mounted() {
+    this.$toast.success('Nội dung toast thành công',  {
+      icon: {
+        iconClass: "material-icons", // Optional
+        iconChildren: "done", // Optional
+        iconTag: "done", // Optional
+      },
+    });
   }
 }
 
