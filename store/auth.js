@@ -1,17 +1,12 @@
-import sendDataToServer from "~/helpers/authentication";
+import {fetchUserProfile, sendDataToServer} from "~/helpers/authentication";
 
 
 export default {
   state: () => ({
-    redirectPath: '/',
-    accessToken: null,
+    accessToken: '',
     user: {}
   }),
-
-  getters: {
-    // ...
-  },
-
+  
   mutations: {
     setUser(state, user) {
       state.user = user
@@ -19,7 +14,7 @@ export default {
     setAccessToken(state, accessToken) {
       state.accessToken = accessToken
     },
-    setRedirectPath(state, redirectPath){
+    setRedirectPath(state, redirectPath) {
       state.redirectPath = redirectPath
     },
     clearAccessToken(state) {
@@ -76,10 +71,13 @@ export default {
           console.log(error)
         })
     },
-    getAccessTokenLocalStorage({commit}, accessToken){
+    getAccessTokenLocalStorage({commit}, accessToken) {
       commit('setAccessToken', {
         accessToken: accessToken
       })
+    },
+    fetchUserProfile({commit}) {
+      fetchUserProfile(this.$axios)
     }
   }
 }

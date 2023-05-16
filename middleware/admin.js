@@ -1,5 +1,3 @@
 export default function ({ store, redirect }) {
-  if (store.state.auth.user.roleId !== 4) {
-    return redirect('/')
-  }
+  const accessToken = store.state.auth.accessToken
 }

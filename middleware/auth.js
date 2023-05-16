@@ -1,5 +1,8 @@
-export default function ({ store, redirect, app}) {
-  if (!store.state.auth.accessToken) {
-    return redirect('/sign-in?dsadsa')
+
+export default function ({ store, redirect}) {
+  const accessToken = store.state.auth.accessToken
+  if (!accessToken) {
+    this.$toast.error('Vui lòng đăng nhập trước!');
+    return redirect('/sign-in')
   }
 }
